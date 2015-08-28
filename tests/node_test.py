@@ -1,4 +1,5 @@
 import unittest
+import coveralls
 import stringtree
 
 class TestNode(unittest.TestCase):
