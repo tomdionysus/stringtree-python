@@ -2,8 +2,7 @@ language: python
 python:
   - "2.7"
 script: 
-  PYTHONPATH=./ coverage run --source=stringtree py.test
-script:
-  - py.test -v --cov coveralls --cov-report term-missing
+  - PYTHONPATH=./ coverage run --source=stringtree py.test
+  - PYTHONPATH=./  py.test -v --cov coveralls --cov-report term-missing
 after_success:
   coveralls
