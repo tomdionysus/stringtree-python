@@ -27,4 +27,6 @@ class TestNode(unittest.TestCase):
     self.assertEqual(nodea.left.char,2)
     self.assertEqual(nodea.right.char,4)
 
+  def testAddVertical(self):
+    nodea = stringtree.Node('a',3)
 
