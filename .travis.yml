@@ -4,6 +4,6 @@ python:
 script: 
   PYTHONPATH=./ coverage run --source=stringtree py.test
 script:
-  - py.test coveralls/tests.py --doctest-modules -v --cov coveralls --cov-report term-missing
+  - py.test -v --cov coveralls --cov-report term-missing
 after_success:
   coveralls
