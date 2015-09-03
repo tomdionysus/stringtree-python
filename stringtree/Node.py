@@ -25,6 +25,21 @@ class Node(object):
       else:
         return self.left.add_horizontal(char)
 
+  def find_horizontal(self,char):
+    if char == self.char:
+      return self 
+
+    if char > self.char:
+      if self.right == None:
+        return None
+      else:
+        return self.right.find_horizontal(char)
+    else:
+      if self.left == None:
+        return None
+      else:
+        return self.left.find_horizontal(char)
+
   def count_left(self):
     x = 0
     while self.left!=None:
@@ -61,6 +76,17 @@ class Node(object):
       offset += 1
 
     self.value = value
+    return self
+
+  def find_vertical(self, key):
+    offset = 0
+    while offset<len(key):
+      self = self.find_horizontal(key[offset])
+      offset += 1
+      if self.down == None:
+        break
+      self = self.down
+
     return self
 
   def to_s(self):
