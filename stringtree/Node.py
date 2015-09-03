@@ -1,39 +1,84 @@
 class Node(object):
 
-  def __init__(self, char = None, value = None):
+  def __init__(self, up, char, value = None):
     self.left = None
     self.right = None
-    self.up = None
+    self.up = up
     self.down = None
     self.char = char
     self.value = value
 
-  def add_horizontal(self, node):
-    if node.char < self.char:
-      if self.left == None:
-        self.left = node
-      else:
-        self.left.add_horizontal(node)
-    else:
+  def add_horizontal(self, char):
+    if char == self.char:
+      return self 
+
+    if char > self.char:
       if self.right == None:
-        self.right = node
+        self.right = Node(self.up, char)
+        return self.right
       else:
-        self.right.add_horizontal(node)
+        return self.right.add_horizontal(char)
+    else:
+      if self.left == None:
+        self.left = Node(self.up, char)
+        return self.left
+      else:
+        return self.left.add_horizontal(char)
 
-  def add_horizontal_new(self, char, value):
-    node = Node(char, value)
-    self.add_horizontal(node)
-    return node
+  def count_left(self):
+    x = 0
+    while self.left!=None:
+      self = self.left
+      x += 1
+    return x
 
-  def add_vertical(self, key, value, offset = 0):
-    node = add_horizontal_new(c, None)
-    
-    while c<key.length:
-      c = key[offset]
+  def count_right(self):
+    x = 0
+    while self.right!=None:
+      self = self.right
+      x += 1
+    return x
+
+
+  def add_vertical(self, key, value):
+    offset = 0
+    while offset<len(key):
+      self = self.add_horizontal(key[offset])
+      offset += 1
+      if self.down == None:
+        break
+      self = self.down
+
+    # TODO: This be ugly but it works. Refactor after coffee
+    # and possibly clue injection.
+    if offset==len(key):
+      self.up.value = value
+      return self.up
+
+    while offset<len(key):
+      self.down = Node(self, key[offset])
+      self = self.down
       offset += 1
 
-    node.value = value
-    return node
+    self.value = value
+    return self
+
+  def to_s(self):
+    s = ""
+    while self != None:
+      s = self.char + s
+      self = self.up
+    return s 
+
+  def walk(self, s = ""):
+    if self.value != None:
+      yield [s+self.char,self.value]
+    if self.left!=None:
+      self.left.walk(s)
+    if self.down!=None:
+      self.down.walk(s+self.char)
+    if self.right!=None:
+      self.right.walk(s)
 
 
 
