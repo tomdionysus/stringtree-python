@@ -46,3 +46,13 @@ class Tree(object):
         count += 1
 
     return count
+
+  def partials(self, key):
+    if self.root == None:
+      return
+    node = self.root.find_vertical(key)
+    if node == None or node.down == None:
+      return
+    for node in node.down.walk():
+      if node.value != None:
+        yield node.to_s()

@@ -1,6 +1,7 @@
 import unittest
 import coveralls
 import stringtree
+import types
 
 class TestTree(unittest.TestCase):
 
@@ -69,3 +70,50 @@ class TestTree(unittest.TestCase):
     tree.delete('two')
     self.assertEqual(tree.count(), 2)
 
+  def test_partials(self):
+    tree = stringtree.Tree()
+    strs = (i for i in [
+      'abortively', 'aboulia', 'abound', 'about', 'above', 'aboveboard', 
+      'abracadabra', 'abrade', 'abrader', 'Abraham', 'abrasion'
+    ])
+
+    for s in strs:
+      tree.add(s, s)
+
+    # Tests
+
+    gen = tree.partials('ab')
+    self.assertTrue(isinstance(gen, types.GeneratorType))
+
+    strs = (i for i in [
+      'abortively', 'aboulia', 'abound', 'about', 'above', 'aboveboard', 
+      'abracadabra', 'abrade', 'abrader', 'abrasion'
+    ])
+
+    for s in strs:
+      self.assertEqual(s,gen.next())
+
+    gen = tree.partials('abo')
+    self.assertTrue(isinstance(gen, types.GeneratorType))
+
+    strs = (i for i in [
+      'abortively', 'aboulia', 'abound', 'about', 'above', 'aboveboard'
+    ])
+
+    for s in strs:
+      x = gen.next()
+      self.assertEqual(s,x)
+
+    gen = tree.partials('abr')
+    self.assertTrue(isinstance(gen, types.GeneratorType))
+
+    strs = (i for i in [
+      'abracadabra', 'abrade', 'abrader', 'abrasion'
+    ])
+
+    for s in strs:
+      x = gen.next()
+      self.assertEqual(s,x)
+
+    gen = tree.partials('asckas')
+    self.assertEqual(sum(1 for i in gen),0)
