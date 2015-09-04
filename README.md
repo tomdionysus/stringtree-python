@@ -10,3 +10,20 @@ StringTree is a fast forward-only tokeniser and partial string matcher, that is,
 * Host a set of strings in such a way as to efficiently match partial input strings against the dictionary
 
 This has become my 'hello world' over the years with any new language. I use it to get to know a language, as implementing it correctly involves many of the usual concepts needed get started coding from the hip (syntax, grammar, classes, public/private instance vars, statics, pass-by value/pass-by-reference etc.) not to mention usual code support skills like how to set up unit tests for this language and environment, etc.
+
+## Testing
+
+    PYTHONPATH=./ py.test
+
+## Demo
+
+    PYTHONPATH=./ python ./examples/demo.py
+
+## Code of Conduct
+
+The StringTree project is committed to the [Contributor Covenant](http://contributor-covenant.org). Please read [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) before making any contributions or comments.
+
+## References
+
+* http://docs.python.org
+* http://en.wikipedia.org/wiki/Trie
