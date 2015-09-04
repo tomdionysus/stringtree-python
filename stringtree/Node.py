@@ -55,37 +55,30 @@ class Node(object):
     return x
 
 
-  def add_vertical(self, key, value):
-    offset = 0
-    while offset<len(key):
-      self = self.add_horizontal(key[offset])
-      offset += 1
-      if self.down == None:
-        break
-      self = self.down
+  def add_vertical(self, key):
+    first = True
+    for c in key:
+      if not first:
+        if self.down == None:
+          self.down = Node(self,c)
+        self = self.down
+      self = self.add_horizontal(c)
+      first = False
 
-    # TODO: This be ugly but it works. Refactor after coffee
-    # and possibly clue injection.
-    if offset==len(key):
-      self.up.value = value
-      return self.up
-
-    while offset<len(key):
-      self.down = Node(self, key[offset])
-      self = self.down
-      offset += 1
-
-    self.value = value
     return self
 
   def find_vertical(self, key):
-    offset = 0
-    while offset<len(key):
-      self = self.find_horizontal(key[offset])
-      offset += 1
-      if self.down == None:
-        break
-      self = self.down
+    first = True
+
+    for c in key:
+      if not first:
+        self = self.down
+        if self == None:
+          return None
+      self = self.find_horizontal(c)
+      if self == None:
+        return None
+      first = False
 
     return self
 
@@ -97,14 +90,16 @@ class Node(object):
     return s 
 
   def walk(self, s = ""):
-    if self.value != None:
-      yield [s+self.char,self.value]
+    yield self
     if self.left!=None:
-      self.left.walk(s)
+      for i in self.left.walk(s):
+        yield i
     if self.down!=None:
-      self.down.walk(s+self.char)
+      for i in self.down.walk(s):
+        yield i
     if self.right!=None:
-      self.right.walk(s)
+      for i in self.right.walk(s):
+        yield i
 
 
 
