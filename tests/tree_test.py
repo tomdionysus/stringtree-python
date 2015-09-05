@@ -9,7 +9,7 @@ class TestTree(unittest.TestCase):
     tree = stringtree.Tree()
     self.assertEqual(tree.root, None)
 
-  def test_add_exists(self):
+  def test_add_has_key(self):
     tree = stringtree.Tree()
 
     tree.add('one', 4)
@@ -19,14 +19,14 @@ class TestTree(unittest.TestCase):
     self.assertEqual(tree.root.char, 'o')
     self.assertEqual(tree.root.down.down.value, 4)
 
-    self.assertTrue(tree.exists('one'))
-    self.assertTrue(tree.exists('two'))
-    self.assertTrue(tree.exists('three'))
+    self.assertTrue(tree.has_key('one'))
+    self.assertTrue(tree.has_key('two'))
+    self.assertTrue(tree.has_key('three'))
 
-    self.assertFalse(tree.exists('o'))
-    self.assertFalse(tree.exists('on'))
-    self.assertFalse(tree.exists('twow'))
-    self.assertFalse(tree.exists('t'))
+    self.assertFalse(tree.has_key('o'))
+    self.assertFalse(tree.has_key('on'))
+    self.assertFalse(tree.has_key('twow'))
+    self.assertFalse(tree.has_key('t'))
 
   def test_delete(self):
     tree = stringtree.Tree()
@@ -37,9 +37,9 @@ class TestTree(unittest.TestCase):
 
     tree.delete('two')
 
-    self.assertTrue(tree.exists('one'))
-    self.assertFalse(tree.exists('two'))
-    self.assertTrue(tree.exists('three'))
+    self.assertTrue(tree.has_key('one'))
+    self.assertFalse(tree.has_key('two'))
+    self.assertTrue(tree.has_key('three'))
 
   def test_clear(self):
     tree = stringtree.Tree()
@@ -52,23 +52,23 @@ class TestTree(unittest.TestCase):
 
     self.assertEqual(tree.root, None)
 
-    self.assertFalse(tree.exists('one'))
-    self.assertFalse(tree.exists('two'))
-    self.assertFalse(tree.exists('three'))
+    self.assertFalse(tree.has_key('one'))
+    self.assertFalse(tree.has_key('two'))
+    self.assertFalse(tree.has_key('three'))
 
   def test_count(self):
     tree = stringtree.Tree()
 
-    self.assertEqual(tree.count(), 0)
+    self.assertEqual(len(tree), 0)
 
     tree.add('one', 4)
-    self.assertEqual(tree.count(), 1)
+    self.assertEqual(len(tree), 1)
     tree.add('two', 5)
-    self.assertEqual(tree.count(), 2)
+    self.assertEqual(len(tree), 2)
     tree.add('three', 6)
-    self.assertEqual(tree.count(), 3)
+    self.assertEqual(len(tree), 3)
     tree.delete('two')
-    self.assertEqual(tree.count(), 2)
+    self.assertEqual(len(tree), 2)
 
   def test_partials(self):
     tree = stringtree.Tree()

@@ -12,7 +12,7 @@ class Tree(object):
 
     node.value = value
 
-  def exists(self, key):
+  def has_key(self, key):
     if self.root == None:
       return False
     node = self.root.find_vertical(key)
@@ -36,16 +36,16 @@ class Tree(object):
       return
     self.root.walk()
 
-  def count(self):
+  def __len__(self):
     if self.root == None:
       return 0
 
-    count = 0
+    len = 0
     for node in self.root.walk():
       if node.value!=None:
-        count += 1
+        len += 1
 
-    return count
+    return len
 
   def partials(self, key):
     if self.root == None:
