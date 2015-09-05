@@ -12,9 +12,9 @@ class TestTree(unittest.TestCase):
   def test_add_has_key(self):
     tree = stringtree.Tree()
 
-    tree.add('one', 4)
-    tree.add('two', 5)
-    tree.add('three', 6)
+    tree['one'] = 4
+    tree['two'] = 5
+    tree['three'] = 6
 
     self.assertEqual(tree.root.char, 'o')
     self.assertEqual(tree.root.down.down.value, 4)
@@ -31,9 +31,9 @@ class TestTree(unittest.TestCase):
   def test_delete(self):
     tree = stringtree.Tree()
 
-    tree.add('one', 4)
-    tree.add('two', 5)
-    tree.add('three', 6)
+    tree['one'] = 4
+    tree['two'] = 5
+    tree['three'] = 6
 
     tree.delete('two')
 
@@ -44,9 +44,9 @@ class TestTree(unittest.TestCase):
   def test_clear(self):
     tree = stringtree.Tree()
 
-    tree.add('one', 4)
-    tree.add('two', 5)
-    tree.add('three', 6)
+    tree['one'] = 4
+    tree['two'] = 5
+    tree['three'] = 6
 
     tree.clear()
 
@@ -61,11 +61,11 @@ class TestTree(unittest.TestCase):
 
     self.assertEqual(len(tree), 0)
 
-    tree.add('one', 4)
+    tree['one'] = 4
     self.assertEqual(len(tree), 1)
-    tree.add('two', 5)
+    tree['two'] = 5
     self.assertEqual(len(tree), 2)
-    tree.add('three', 6)
+    tree['three'] = 6
     self.assertEqual(len(tree), 3)
     tree.delete('two')
     self.assertEqual(len(tree), 2)
@@ -78,7 +78,7 @@ class TestTree(unittest.TestCase):
     ])
 
     for s in strs:
-      tree.add(s, s)
+      tree[s] = s
 
     # Tests
 
