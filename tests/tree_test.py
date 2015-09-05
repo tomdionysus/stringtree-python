@@ -28,14 +28,14 @@ class TestTree(unittest.TestCase):
     self.assertFalse(tree.has_key('twow'))
     self.assertFalse(tree.has_key('t'))
 
-  def test_delete(self):
+  def test_del(self):
     tree = stringtree.Tree()
 
     tree['one'] = 4
     tree['two'] = 5
     tree['three'] = 6
 
-    tree.delete('two')
+    del tree['two']
 
     self.assertTrue(tree.has_key('one'))
     self.assertFalse(tree.has_key('two'))
@@ -67,7 +67,7 @@ class TestTree(unittest.TestCase):
     self.assertEqual(len(tree), 2)
     tree['three'] = 6
     self.assertEqual(len(tree), 3)
-    tree.delete('two')
+    del tree['two']
     self.assertEqual(len(tree), 2)
 
   def test_partials(self):

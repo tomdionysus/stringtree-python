@@ -26,10 +26,7 @@ class Tree(object):
     node = self.root.find_vertical(key)
     return node != None and node.value != None
 
-  def __del__(self, key):
-    self.delete(key)
-
-  def delete(self, key):
+  def __delitem__(self, key):
     if self.root == None:
       return False
     node = self.root.find_vertical(key)
