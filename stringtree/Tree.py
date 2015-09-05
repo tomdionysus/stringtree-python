@@ -26,6 +26,8 @@ class Tree(object):
     node = self.root.find_vertical(key)
     return node != None and node.value != None
 
+  __contains__ = has_key
+
   def __delitem__(self, key):
     if self.root == None:
       return False

@@ -9,7 +9,7 @@ class TestTree(unittest.TestCase):
     tree = stringtree.Tree()
     self.assertEqual(tree.root, None)
 
-  def test_add_has_key(self):
+  def test_add_has_key_or_in(self):
     tree = stringtree.Tree()
 
     tree['one'] = 4
@@ -23,10 +23,19 @@ class TestTree(unittest.TestCase):
     self.assertTrue(tree.has_key('two'))
     self.assertTrue(tree.has_key('three'))
 
+    self.assertTrue('one' in tree)
+    self.assertTrue('two' in tree)
+    self.assertTrue('three' in tree)
+
     self.assertFalse(tree.has_key('o'))
     self.assertFalse(tree.has_key('on'))
-    self.assertFalse(tree.has_key('twow'))
+    self.assertFalse(tree.has_key('onex'))
     self.assertFalse(tree.has_key('t'))
+
+    self.assertFalse('o' in tree)
+    self.assertFalse('on' in tree)
+    self.assertFalse('onex' in tree)
+    self.assertFalse('t' in tree)
 
   def test_del(self):
     tree = stringtree.Tree()
